@@ -1,6 +1,6 @@
 Name:           perl-IPC-Run3
 Version:        0.043
-Release:        3%{?dist}
+Release:        5%{?dist}
 Summary:        Run a subprocess in batch mode
 License:        (GPL+ or Artistic) or BSD
 Group:          Development/Libraries
@@ -9,10 +9,14 @@ Source0:        http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/IPC-Run3-%{vers
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Getopt::Long)
+BuildRequires:  perl(Time::HiRes)
 # For improved tests
 BuildRequires:  perl(Test::Pod::Coverage)
 BuildRequires:  perl(Test::Pod)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:       perl(Getopt::Long)
+Requires:       perl(Time::HiRes)
 
 %description
 This module allows you to run a subprocess and redirect stdin, stdout,
@@ -52,6 +56,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Fri Oct 26 2012 Petr Pisar <ppisar@redhat.com> - 0.043-5
+- Run-require Getopt::Long and Time::HiRes (Resolves: #870089)
+
+* Fri Sep 21 2012 Petr Pisar <ppisar@redhat.com> - 0.043-4
+- Build-require Time::HiRes (Resolves: #657487)
+
 * Mon Dec  7 2009 Stepan Kasal <skasal@redhat.com> - 0.043-3
 - rebuild against perl 5.10.1
 
