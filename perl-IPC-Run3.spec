@@ -1,6 +1,6 @@
 Name:           perl-IPC-Run3
 Version:        0.045
-Release:        4%{?dist}
+Release:        6%{?dist}
 Summary:        Run a subprocess in batch mode
 License:        GPL+ or Artistic or BSD
 Group:          Development/Libraries
@@ -20,6 +20,8 @@ BuildRequires:  perl(Time::HiRes)
 BuildRequires:  perl(Test::Pod::Coverage)
 BuildRequires:  perl(Test::Pod)
 Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+# Time::HiRes needed for debugging with IPCRUN3PROFILE=1, bug #1034866
+Requires:       perl(Time::HiRes)
 
 %description
 This module allows you to run a subprocess and redirect stdin, stdout,
@@ -51,6 +53,12 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.045-6
+- Mass rebuild 2013-12-27
+
+* Thu Nov 28 2013 Petr Pisar <ppisar@redhat.com> - 0.045-5
+- Add run-time dependency on Time::HiRes for for debugging mode (bug #1034866)
+
 * Fri Nov 23 2012 Petr Šabata <contyk@redhat.com> - 0.045-4
 - Add missing BRs
 - Drop command macros
